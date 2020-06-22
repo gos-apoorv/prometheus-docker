@@ -1,0 +1,14 @@
+#No change to this file will be checked in git: git update-index --assume-unchanged alertmanager.yml
+
+global:
+  resolve_timeout: 1m
+  slack_api_url: 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXX'
+
+route:
+  receiver: 'slack-notifications'
+ 
+receivers:
+    - name: 'slack-notifications'
+      slack_configs:
+      - channel: '#data-team-errors-st'
+        send_resolved: true
