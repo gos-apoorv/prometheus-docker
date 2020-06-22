@@ -31,7 +31,7 @@ This requires installation of [docker-for-desktop](https://www.docker.com/produc
 In order to run this simply download the folder and run it using following commands:
 
 ```bash
-# Run it from the parent directory i.e. where we have docker-compose.yml file
+# Run it from the parent directory i.e. path where docker-compose.yml file exists
 ~/prometheus-docker$docker-compose up [-d]
 ```
 
@@ -58,3 +58,7 @@ To remove the deploymnet, run the following command:
 ```bash
 docker stack remove prom_stack
 ```
+
+## Open Issue
+
+Prometheus unable to scrape cadvisor in docker stack/k8s:  <https://github.com/gos-apoorv/prometheus-docker/issues/1>

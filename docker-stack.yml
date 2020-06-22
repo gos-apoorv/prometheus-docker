@@ -1,5 +1,11 @@
 version: '3.1'
 
+networks:
+  promnet:
+    driver: bridge
+  dbnet:
+    driver: bridge
+
 services:
   prometheus:
     image: prom/prometheus
@@ -44,8 +50,8 @@ services:
   cadvisor:
     image: google/cadvisor
     ports:
-      - 9880:8080
-    # command: -logtostderr -docker_only
+      - 8080:8080
+    command: -logtostderr -docker_only
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock,readonly
       - /:/rootfs:ro
@@ -56,7 +62,7 @@ services:
       - /cgroup:/sys/fs/cgroup:ro 
     privileged: true
     networks:
-      - promnets
+      - promnet
     deploy:
       mode: global
       resources:
@@ -99,8 +105,3 @@ services:
     networks:
       - dbnet
 
-networks:
-  promnet:
-    driver: bridge
-  dbnet:
-    driver: bridge
