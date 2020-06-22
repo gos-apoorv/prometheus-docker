@@ -52,7 +52,7 @@ services:
   cadvisor:
     image: google/cadvisor
     ports:
-      - 9880:8080
+      - "9880:8080" #8080
     restart: always
     volumes:
       - /:/rootfs:ro
