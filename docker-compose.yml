@@ -96,8 +96,35 @@ services:
     networks:
       - dbnet
 
+  dbpostgres:
+    image: postgres:9.6
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: adminbq
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_DB: my_db
+    networks:
+      - dbnet
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    # Connection in cli: psql "dbname=my_db host=localhost user=adminbq password=pass123 port=5432"
+    # https://dev.to/sonyarianto/how-to-spin-mysql-server-with-docker-and-docker-compose-33b2
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9095:8080
+    networks:
+      - dbnet
+
 networks:
   promnet:
     driver: bridge
   dbnet:
     driver: bridge
+
+volumes:
+  postgres-data: # named volumes can be managed easier using docker-compose
