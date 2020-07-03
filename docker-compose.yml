@@ -10,7 +10,7 @@ services:
       - '--config.file=/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/data'
     ports:
-      - 9090:9090
+      - 9092:9090
     depends_on:
       - alertmanager
     restart: always
