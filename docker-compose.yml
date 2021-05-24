@@ -17,6 +17,23 @@ services:
     networks:
       - promnet
 
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    command:
+      - '-config=/prometheus/grafana.yml'
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+      - ./prometheus:/prometheus
+    environment:
+      - GF_SECURITY_ADMIN_USER=MYUSER
+      - GF_SECURITY_ADMIN_PASSWORD=MYPASSWORD
+      - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - 9080:3000
+    networks:
+      - promnet
+
   alertmanager:
     image: prom/alertmanager
     volumes:
